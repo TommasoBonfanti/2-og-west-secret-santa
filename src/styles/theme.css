@@ -1,0 +1,267 @@
+/* "Fireside" theme — tokens and base styles. */
+:root {
+  --bg: #9e1b1b;
+  --bg-edge: #6e1010;
+  --cord: #3d1a0a;
+  --gold: #ffd36b;
+  --gold-soft: #ffe2a8;
+  --cream: #fff6e8;
+  --cream-2: #fff3e0;
+  --paper: #fffaf0;
+  --brown: #5a2a14;
+  --brown-soft: #7a4a30;
+  --red: #b31b1b;
+  --red-dark: #8f1414;
+  --red-candy: #e02424;
+  --red-outline: #5c0d0d;
+  --green: #2e7d32;
+  --green-soft: #7fd18b;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 10px 28px rgba(40, 6, 6, 0.35), 0 2px 6px rgba(40, 6, 6, 0.25);
+  --shadow-soft: 0 6px 16px rgba(40, 6, 6, 0.3);
+  --focus: 0 0 0 3px var(--gold), 0 0 0 5px var(--red-outline);
+
+  --font-display: 'Mountains of Christmas', 'Georgia', serif;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --gutter: 16px;
+  --content: 960px;
+  --lights-h: max(96px, 5vw);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--cream);
+  background-color: var(--bg);
+  overflow-x: hidden;
+}
+
+/* Subtle, flat vignette toward the edges as a second fixed layer. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 0) 55%, rgba(60, 6, 6, 0.38) 100%);
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.5em;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0 0 0.9em;
+}
+
+a {
+  color: var(--gold-soft);
+  text-underline-offset: 3px;
+}
+
+.card a:not(.btn) {
+  color: var(--red);
+  font-weight: 600;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: rgba(90, 42, 20, 0.1);
+  padding: 0.05em 0.35em;
+  border-radius: 6px;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: 8px;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--brown);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  background: var(--cream);
+  color: var(--brown);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ---------- Layout ---------- */
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 100%;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 8px var(--gutter) 48px;
+}
+
+.main:focus {
+  box-shadow: none;
+}
+
+.narrow {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page.narrow {
+  gap: 16px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.center {
+  text-align: center;
+}
+
+.muted {
+  color: var(--brown-soft);
+}
+
+.small {
+  font-size: 0.88rem;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  color: var(--red);
+  letter-spacing: 0.01em;
+}
+
+.small-display {
+  font-size: clamp(1.8rem, 6vw, 2.3rem);
+}
+
+.lead {
+  font-size: 1.05rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: clamp(1.8rem, 6vw, 2.3rem);
+  text-align: center;
+  text-shadow: 0 2px 0 rgba(60, 6, 6, 0.4);
+  margin: 12px 0 8px;
+}
+
+.page-title {
+  text-align: center;
+  margin: 6px 0 4px;
+}
+
+.page-title h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: clamp(2.2rem, 8vw, 3rem);
+  text-shadow: 0 2px 0 rgba(60, 6, 6, 0.45);
+  margin-bottom: 4px;
+}
+
+.page-sub {
+  color: var(--cream-2);
+  margin: 0;
+}
+
+.two-col {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

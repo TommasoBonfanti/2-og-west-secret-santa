@@ -1,0 +1,492 @@
+/* ---------- Fairy lights ---------- */
+
+.fairy-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--lights-h);
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fairy-lights svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.bulb {
+  animation: twinkle 2.6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+@keyframes twinkle {
+  0%,
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 1px currentColor);
+  }
+}
+
+.hanging-67 {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: swing 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes swing {
+  from {
+    transform: rotate(-5deg);
+  }
+  to {
+    transform: rotate(5deg);
+  }
+}
+
+/* ---------- Snow ---------- */
+
+.snow {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.flake {
+  position: absolute;
+  top: -12px;
+  border-radius: 50%;
+  background: #fffaf0;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes fall {
+  from {
+    transform: translate3d(0, -10vh, 0);
+  }
+  50% {
+    transform: translate3d(var(--drift), 50vh, 0);
+  }
+  to {
+    transform: translate3d(0, 110vh, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snow {
+    display: none;
+  }
+}
+
+/* ---------- Background 67s ---------- */
+
+.bg-67s {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-67 {
+  position: absolute;
+  opacity: 0.85;
+  filter: drop-shadow(0 3px 4px rgba(40, 6, 6, 0.35));
+}
+
+.bg-67 svg {
+  display: block;
+}
+
+@media (max-width: 1099px) {
+  .bg-67.wide-only {
+    display: none;
+  }
+}
+
+.wobble {
+  animation: wobble 2.4s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-3px);
+  }
+}
+
+/* ---------- Polaroids ---------- */
+
+.polaroid {
+  --tilt: 0deg;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px 10px 12px;
+  background: var(--paper);
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 10px 22px rgba(40, 6, 6, 0.4), 0 2px 4px rgba(40, 6, 6, 0.25);
+  transform: rotate(var(--tilt));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--brown);
+  font: inherit;
+  text-align: center;
+  vertical-align: top;
+}
+
+.polaroid::after {
+  /* thicker bottom edge */
+  content: '';
+  display: block;
+  height: 24px;
+}
+
+.polaroid:has(.polaroid-caption)::after {
+  height: 0;
+}
+
+.polaroid-md {
+  width: 200px;
+}
+
+.polaroid-sm {
+  width: 150px;
+}
+
+.polaroid-lg {
+  width: 260px;
+}
+
+.polaroid-photo {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #efe6d6;
+}
+
+.polaroid-photo img,
+.polaroid-photo .art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.polaroid-caption {
+  display: block;
+  min-height: 30px;
+  padding-top: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.1;
+  color: var(--brown);
+}
+
+.polaroid-clickable {
+  cursor: zoom-in;
+}
+
+.polaroid-clickable:hover,
+.polaroid-clickable:focus-visible {
+  transform: rotate(0deg) scale(1.04);
+  z-index: 1;
+}
+
+.polaroid-clickable:focus-visible {
+  box-shadow: var(--focus), 0 10px 22px rgba(40, 6, 6, 0.4);
+  border-radius: 3px;
+}
+
+.art-candy {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream-2);
+}
+
+.art-candy svg {
+  width: 70%;
+  height: auto;
+}
+
+/* ---------- Present (unwrap) ---------- */
+
+.present-card {
+  overflow: hidden;
+}
+
+.present-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 0 4px;
+}
+
+.present {
+  position: relative;
+  width: 220px;
+  height: 210px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  animation: invite 3.5s ease-in-out infinite;
+}
+
+.present:disabled {
+  cursor: default;
+}
+
+.present:focus-visible {
+  border-radius: 20px;
+}
+
+.present-box {
+  position: absolute;
+  left: 25px;
+  right: 25px;
+  bottom: 0;
+  height: 130px;
+  background: var(--red);
+  border-radius: 6px;
+  box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.12), 0 10px 18px rgba(40, 6, 6, 0.35);
+}
+
+.present-ribbon-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  transform: translateX(-50%);
+  background: var(--gold);
+}
+
+.present-ribbon-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 22px;
+  transform: translateY(-50%);
+  background: var(--gold);
+}
+
+.present-lid {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 124px;
+  height: 40px;
+  z-index: 2;
+  background: #c62828;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  background-image: linear-gradient(90deg, transparent calc(50% - 12px), var(--gold) calc(50% - 12px), var(--gold) calc(50% + 12px), transparent calc(50% + 12px));
+  transform-origin: 20% 100%;
+}
+
+.present-bow {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 0;
+  height: 0;
+}
+
+.bow-loop {
+  position: absolute;
+  bottom: -6px;
+  width: 52px;
+  height: 34px;
+  border: 9px solid var(--gold);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: transparent;
+}
+
+.bow-left {
+  right: 2px;
+  transform: rotate(-18deg);
+}
+
+.bow-right {
+  left: 2px;
+  transform: rotate(18deg);
+}
+
+.bow-knot {
+  position: absolute;
+  left: -12px;
+  bottom: -8px;
+  width: 24px;
+  height: 22px;
+  border-radius: 8px;
+  background: #e6b84a;
+}
+
+.present-tag {
+  position: absolute;
+  right: 2px;
+  bottom: 54px;
+  z-index: 3;
+  transform-origin: 0 0;
+  transform: rotate(12deg);
+}
+
+.present-tag-string {
+  position: absolute;
+  left: -14px;
+  top: 6px;
+  width: 22px;
+  height: 2px;
+  background: var(--cord);
+  transform: rotate(-20deg);
+}
+
+.present-tag-card {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 40px;
+  background: var(--cream-2);
+  border: 2px solid var(--gold);
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);
+  padding-left: 10px;
+}
+
+.present-hint {
+  margin: 14px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--red);
+}
+
+@keyframes invite {
+  0%,
+  80%,
+  100% {
+    transform: rotate(0);
+  }
+  85% {
+    transform: rotate(-3deg);
+  }
+  90% {
+    transform: rotate(3deg);
+  }
+  95% {
+    transform: rotate(-2deg);
+  }
+}
+
+.present.is-opening {
+  animation: shake 0.35s ease-in-out 1;
+}
+
+.present.is-opening .present-lid {
+  animation: lid-off 0.9s 0.3s cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
+}
+
+.present.is-opening .present-tag {
+  animation: tag-fall 0.8s 0.3s ease-in forwards;
+}
+
+@keyframes shake {
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes lid-off {
+  to {
+    transform: translate(-30px, -120px) rotate(-28deg);
+    opacity: 0;
+  }
+}
+
+@keyframes tag-fall {
+  to {
+    transform: translateY(40px) rotate(40deg);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 0;
+  height: 0;
+  z-index: 4;
+}
+
+.confetto {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: burst 1.1s ease-out forwards;
+}
+
+.confetto.round {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+  }
+}
+
+/* ---------- Reveal gift tag ---------- */
+
+.gift-tag {
+  position: absolute;
+  top: -22px;
+  right: 22px;
+  width: 64px;
+  height: 84px;
+  background: var(--cream-2);
+  border: 3px solid var(--gold);
+  border-radius: 10px 10px 6px 6px;
+  clip-path: polygon(50% 0, 100% 18%, 100% 100%, 0 100%, 0 18%);
+  transform: rotate(8deg);
+  box-shadow: var(--shadow-soft);
+}
+
+.gift-tag-hole {
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  transform: translateX(-50%);
+}
